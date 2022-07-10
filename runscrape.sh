@@ -15,14 +15,16 @@ function cleanit() {
 mkdir "$1"
 cd "$1"
 
-wget https://cde-lumiere-disneyplus.bamgrid.com/d-sitemap-1.xml
-wget https://cde-lumiere-disneyplus.bamgrid.com/d-sitemap-2.xml
+# uncomment for sitemap based pulling
+# wget https://cde-lumiere-disneyplus.bamgrid.com/d-sitemap-1.xml
+# wget https://cde-lumiere-disneyplus.bamgrid.com/d-sitemap-2.xml
 
-for langname in $langs
-do
+function pulllang() {
+	langname="$1"
 	mkdir "$langname"
 	cd "$langname"
-	python3 "$basedir/pullit.py" "$langname" allurls.txt allurls_series.txt ../*.xml
+	# python3 "$basedir/pullit.py" "$langname" allurls.txt allurls_series.txt ../*.xml
+	python3 "$basedir/pullit_atoz.py" "$langname" allurls.txt allurls_series.txt
 	mkdir disneyplus_movies
 	mkdir disneyplus_series
 	cd disneyplus_movies
@@ -34,4 +36,10 @@ do
 	md5sum * >../md5_series.txt
 	cleanit ../md5_series.txt
 	cd ../../
+}
+
+for langname in $langs
+do
+	pulllang "$langname" &
 done
+wait

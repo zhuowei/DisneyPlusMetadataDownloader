@@ -1,13 +1,17 @@
 import json
 import os
 import csv
+import sys
 
 
 def doone(filename, nameid):
     with open(filename, "r") as infile:
         indata = json.load(infile)
     if "DmcSeriesBundle" in indata["data"]:
-        video = indata["data"]["DmcSeriesBundle"]["episodes"]["videos"][0]
+        videos = indata["data"]["DmcSeriesBundle"]["episodes"]["videos"]
+        if len(videos) == 0:
+            return None
+        video = videos[0]
         textbundle = indata["data"]["DmcSeriesBundle"]["series"]["text"]
         texttype = "series"
     else:
@@ -44,9 +48,9 @@ def doall(foldername):
 
 
 def main():
-    rows = doall("disneyplus_20220130")
+    rows = doall(sys.argv[1])
     rows.sort(key=lambda a: a[0])
-    with open("disneyplus_20220130.csv", "w") as csvfile:
+    with open(sys.argv[2], "w") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Title", "ID", "Audio", "Subtitles"])
         writer.writerows(rows)
