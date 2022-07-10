@@ -26,11 +26,12 @@ def doone(filename, nameid):
         return i["language"] + "-" + i["trackType"]
 
     tracks_text = "|".join(
-        [nameTrack(i) for i in media_metadata["audioTracks"]])
-    subtitles_text = "|".join([
-        nameTrack(i) for i in media_metadata["captions"]
-        if i["trackType"] != "FORCED"
-    ])
+        sorted([nameTrack(i) for i in media_metadata["audioTracks"]]))
+    subtitles_text = "|".join(
+        sorted([
+            nameTrack(i) for i in media_metadata["captions"]
+            if i["trackType"] != "FORCED"
+        ]))
     video_title = textbundle["title"]["full"][texttype]["default"]["content"]
     return [video_title, nameid, tracks_text, subtitles_text]
 
