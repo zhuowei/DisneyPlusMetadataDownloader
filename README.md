@@ -7,6 +7,12 @@ Usage:
 ./gencsv_all_lang.sh scrape_outdir
 ```
 
+Scraped output (2022-09-10):
+
+- Locales: de-DE, en-US, es-CL, fr-CA, fr-FR, nl-NL
+- [JSON/CSVs for all locales](https://drive.google.com/file/d/1aZrSjxisn_YOL30GSMVxDhbapyZaWSpb/view?usp=sharing)
+- [en-US Spreadsheet](https://docs.google.com/spreadsheets/d/1X7hNw8fCgSD6HScdkaPoCDOpFAkNd6_RQYjBTEi00Qs/edit?usp=sharing)
+
 Scraped output (2022-08-07):
 
 - Locales: de-DE, en-US, es-CL, fr-CA, fr-FR, nl-NL
